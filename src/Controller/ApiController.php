@@ -18,6 +18,8 @@ class ApiController extends AbstractController
 
         $result = $processor->compareRepos($repo1, $repo2);
 
-        return $this->json($result);
+        $response = $this->json($result);
+        $response->setEncodingOptions($response->getEncodingOptions() | JSON_PRETTY_PRINT);
+        return $response;
     }
 }
