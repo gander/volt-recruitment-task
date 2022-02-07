@@ -37,8 +37,6 @@ services:
     App\Provider\RepoDataProvider:
         arguments:
             $githubClient: !service
-                public: false
-                shared: true
                 class: Symfony\Component\HttpClient\CachingHttpClient
                 arguments:
                     $client: '@github.client'

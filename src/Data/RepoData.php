@@ -2,9 +2,10 @@
 
 namespace App\Data;
 
+use JsonSerializable;
 use Webmozart\Assert\Assert;
 
-class RepoData implements \JsonSerializable
+class RepoData implements JsonSerializable
 {
 
     protected string $fullName;

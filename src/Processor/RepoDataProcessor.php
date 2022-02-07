@@ -4,6 +4,8 @@ namespace App\Processor;
 
 use App\Data\RepoData;
 use App\Provider\RepoDataProvider;
+use InvalidArgumentException;
+use JsonSerializable;
 
 class RepoDataProcessor
 {
@@ -23,7 +25,7 @@ class RepoDataProcessor
         $result1 = $this->provider->getData($fullName1);
         $result2 = $this->provider->getData($fullName2);
 
-        return new class ($result1, $result2) implements \JsonSerializable {
+        return new class ($result1, $result2) implements JsonSerializable {
             protected RepoData $data1;
             protected RepoData $data2;
 
@@ -78,7 +80,7 @@ class RepoDataProcessor
     public function getFullName(string $url): string
     {
         if (!preg_match(self::URL_REGEXP, $url, $matches)) {
-            throw new \InvalidArgumentException('Invalid repository url');
+            throw new InvalidArgumentException('Invalid repository url');
         }
 
         return $matches['full_name'];

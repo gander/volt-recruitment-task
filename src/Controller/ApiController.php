@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api', name: 'api')]
+    #[Route('/api', name: 'api', methods: 'GET')]
     public function index(RepoDataProcessor $processor, Request $request): Response
     {
         $repo1 = (string)$request->query->get('repo1');
@@ -18,11 +18,6 @@ class ApiController extends AbstractController
 
         $result = $processor->compareRepos($repo1, $repo2);
 
-        return $this->json(
-            $result,
-            200,
-            [], [
-            'json_encode_options' => JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT | JSON_PRETTY_PRINT,
-        ]);
+        return $this->json($result);
     }
 }
