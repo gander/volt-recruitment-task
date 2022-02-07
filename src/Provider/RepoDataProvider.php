@@ -19,7 +19,16 @@ class RepoDataProvider implements RepoDataProviderInterface
     {
         Assert::regex($fullName, '~^[a-zA-Z0-9-_.]+/[a-zA-Z0-9-_.]+$~');
 
-        $data = $this->client->request('GET', "https://api.github.com/repos/${fullName}")->toArray();
+        $response = $this->client->request('GET', "https://api.github.com/repos/${fullName}");
+
+        if (
+            ($response->getStatusCode() === 403) &&
+            (($response->getHeaders(false)['x-ratelimit-remaining'][0] ?? "1") === "0")
+        ) {
+            throw new \Exception('GitHub Rate Limit Exhausted');
+        }
+
+        $data = $response->toArray();
 
         Assert::keyExists($data, 'full_name');
         Assert::keyExists($data, 'subscribers_count');
