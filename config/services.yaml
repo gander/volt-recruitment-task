@@ -22,3 +22,27 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    
+#    github.client.store:
+#        class: Symfony\Component\HttpKernel\HttpCache\Store
+#        arguments:
+#            $root: '%kernel.cache_dir%/http-client-github'
+#
+#    github.client.cache:
+#        class: Symfony\Component\HttpClient\CachingHttpClient
+#        arguments:
+#            $client: '@github.client'
+#            $store: '@github.client.store'
+    
+    App\Provider\RepoDataProvider:
+        arguments:
+            $githubClient: !service
+                public: false
+                shared: true
+                class: Symfony\Component\HttpClient\CachingHttpClient
+                arguments:
+                    $client: '@github.client'
+                    $store: !service
+                        class: Symfony\Component\HttpKernel\HttpCache\Store
+                        arguments:
+                            $root: '%kernel.cache_dir%/http-client-github'
