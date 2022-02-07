@@ -10,20 +10,16 @@ class RepoDataProvider implements RepoDataProviderInterface
 {
     protected HttpClientInterface $client;
 
-    public function __construct(HttpClientInterface $client)
+    public function __construct(HttpClientInterface $githubClient)
     {
-        $this->client = $client;
+        $this->client = $githubClient;
     }
 
     public function getData(string $fullName): RepoData
     {
         Assert::regex($fullName, '~^[a-zA-Z0-9-_.]+/[a-zA-Z0-9-_.]+$~');
 
-        $client = $this->client->withOptions([
-            'base_uri' => "https://api.github.com/repos/${fullName}/",
-        ]);
-
-        $data = $client->request('GET', "/")->toArray();
+        $data = $this->client->request('GET', "https://api.github.com/repos/${fullName}")->toArray();
 
         Assert::keyExists($data, 'full_name');
         Assert::keyExists($data, 'subscribers_count');
@@ -39,7 +35,7 @@ class RepoDataProvider implements RepoDataProviderInterface
 
         Assert::same($fullName2, $fullName);
 
-        $data = $client->request('GET', "/pulls")->toArray();
+        $data = $this->client->request('GET', "https://api.github.com/repos/${fullName}/pulls")->toArray();
 
         Assert::allKeyExists($data, 'state');
 
