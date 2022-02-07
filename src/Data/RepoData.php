@@ -12,6 +12,7 @@ class RepoData implements \JsonSerializable
 
     public function __construct(string $fullName, array $stats)
     {
+        Assert::stringNotEmpty($fullName);
         Assert::allInteger($stats);
         Assert::keyExists($stats, 'watchers');
         Assert::keyExists($stats, 'stars');
