@@ -4,7 +4,7 @@ namespace App\Data;
 
 use Webmozart\Assert\Assert;
 
-class RepoData
+class RepoData implements \JsonSerializable
 {
 
     protected string $fullName;
@@ -52,4 +52,18 @@ class RepoData
     {
         return $this->fullName;
     }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'full_name' => $this->fullName,
+            'watchers' => $this->stats['watchers'],
+            'stars' => $this->stats['stars'],
+            'forks' => $this->stats['forks'],
+            'pulls_open' => $this->stats['pullsOpen'],
+            'pulls_closed' => $this->stats['pullsClosed'],
+        ];
+    }
+
+
 }
