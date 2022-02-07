@@ -17,7 +17,7 @@ class RepoDataProviderTest extends TestCase
 
         $provider = new \App\Provider\RepoDataProvider($httpClient);
 
-        $data = $provider->getData('symfony', 'symfony');
+        $data = $provider->getData('symfony/symfony');
 
         $this->assertIsObject($data);
 
@@ -72,7 +72,7 @@ class RepoDataProviderTest extends TestCase
 
         $this->expectException($exception);
 
-        $provider->getData('symfony', 'symfony');
+        $provider->getData('symfony/symfony');
     }
 
     public function dataProviderGetDataExceptions(): \Generator
@@ -123,7 +123,7 @@ class RepoDataProviderTest extends TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $provider->getData('', 'symfony');
+        $provider->getData('/symfony');
     }
 
     public function testGetDataWrongNameException(): void
@@ -133,7 +133,7 @@ class RepoDataProviderTest extends TestCase
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $provider->getData('symfony', '');
+        $provider->getData('symfony/');
     }
 
 }

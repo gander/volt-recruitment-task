@@ -15,13 +15,12 @@ class RepoDataProvider implements RepoDataProviderInterface
         $this->client = $client;
     }
 
-    public function getData(string $owner, string $name): RepoData
+    public function getData(string $fullName): RepoData
     {
-        Assert::stringNotEmpty($owner);
-        Assert::stringNotEmpty($name);
+        Assert::regex($fullName, '~^[a-zA-Z0-9-_.]+/[a-zA-Z0-9-_.]+$~');
 
         $client = $this->client->withOptions([
-            'base_uri' => "https://api.github.com/repos/${owner}/${name}/",
+            'base_uri' => "https://api.github.com/repos/${fullName}/",
         ]);
 
         $data = $client->request('GET', "/")->toArray();
@@ -32,13 +31,13 @@ class RepoDataProvider implements RepoDataProviderInterface
         Assert::keyExists($data, 'forks_count');
 
         [
-            'full_name' => $fullName,
+            'full_name' => $fullName2,
             'subscribers_count' => $watchers,
             'stargazers_count' => $stars,
             'forks_count' => $forks,
         ] = $data;
 
-        Assert::same($fullName, "{$owner}/{$name}");
+        Assert::same($fullName2, $fullName);
 
         $data = $client->request('GET', "/pulls")->toArray();
 

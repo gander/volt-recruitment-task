@@ -6,5 +6,5 @@ use App\Data\RepoData;
 
 interface RepoDataProviderInterface
 {
-    public function getData(string $owner, string $name): RepoData;
+    public function getData(string $fullName): RepoData;
 }
