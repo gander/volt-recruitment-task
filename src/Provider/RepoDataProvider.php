@@ -48,10 +48,16 @@ class RepoDataProvider implements RepoDataProviderInterface
         Assert::allInArray($data, ['open', 'closed']);
 
         [
-            'open' => $open,
-            'closed' => $closed,
+            'open' => $pullsOpen,
+            'closed' => $pullsClosed,
         ] = array_count_values($data) + ['open' => 0, 'closed' => 0];
 
-        return new RepoData($fullName, $watchers, $watchers, $stars, $forks, $open, $closed);
+        return new RepoData($fullName, compact(
+            'watchers',
+            'stars',
+            'forks',
+            'pullsOpen',
+            'pullsClosed'
+        ));
     }
 }

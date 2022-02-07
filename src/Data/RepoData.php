@@ -2,49 +2,50 @@
 
 namespace App\Data;
 
+use Webmozart\Assert\Assert;
+
 class RepoData
 {
 
-    protected int $watchers;
-    protected int $stars;
-    protected int $forks;
-    protected int $pullsOpen;
-    protected int $pullsClosed;
     protected string $fullName;
+    protected array $stats;
 
-    public function __construct(string $fullName, int $watchers, int $stars, int $forks, int $pullsOpen, int $pullsClosed)
+    public function __construct(string $fullName, array $stats)
     {
-        $this->watchers = $watchers;
-        $this->stars = $stars;
-        $this->forks = $forks;
-        $this->pullsOpen = $pullsOpen;
-        $this->pullsClosed = $pullsClosed;
+        Assert::allInteger($stats);
+        Assert::keyExists($stats, 'watchers');
+        Assert::keyExists($stats, 'stars');
+        Assert::keyExists($stats, 'forks');
+        Assert::keyExists($stats, 'pullsOpen');
+        Assert::keyExists($stats, 'pullsOpen');
+
+        $this->stats = $stats;
         $this->fullName = $fullName;
     }
 
     public function getWatchersCount(): int
     {
-        return $this->watchers;
+        return $this->stats['watchers'];
     }
 
     public function getStarsCount(): int
     {
-        return $this->stars;
+        return $this->stats['stars'];
     }
 
     public function getForksCount(): int
     {
-        return $this->forks;
+        return $this->stats['forks'];
     }
 
     public function getPullsOpenCount(): int
     {
-        return $this->pullsOpen;
+        return $this->stats['pullsOpen'];
     }
 
     public function getPullsClosedCount(): int
     {
-        return $this->pullsClosed;
+        return $this->stats['pullsClosed'];
     }
 
     public function getFullName(): string
