@@ -21,12 +21,14 @@ class RepoDataProviderTest extends TestCase
 
         $this->assertIsObject($data);
 
+        $this->assertIsString($data->getFullName());
         $this->assertIsInt($data->getWatchersCount());
         $this->assertIsInt($data->getStarsCount());
         $this->assertIsInt($data->getForksCount());
         $this->assertIsInt($data->getPullsOpenCount());
         $this->assertIsInt($data->getPullsClosedCount());
 
+        $this->assertSame("symfony/symfony", $data->getFullName());
         $this->assertGreaterThanOrEqual(0, $data->getWatchersCount());
         $this->assertGreaterThanOrEqual(0, $data->getStarsCount());
         $this->assertGreaterThanOrEqual(0, $data->getForksCount());
@@ -38,22 +40,22 @@ class RepoDataProviderTest extends TestCase
     public function dataProviderGetData(): \Generator
     {
         yield 'good json; empty json' => [
-            new MockResponse('{"subscribers_count":0,"stargazers_count":0,"forks_count":0}'),
+            new MockResponse('{"full_name":"symfony/symfony","subscribers_count":0,"stargazers_count":0,"forks_count":0}'),
             new MockResponse('[]'),
         ];
 
         yield 'good json; good json: both states' => [
-            new MockResponse('{"subscribers_count":0,"stargazers_count":0,"forks_count":0}'),
+            new MockResponse('{"full_name":"symfony/symfony","subscribers_count":0,"stargazers_count":0,"forks_count":0}'),
             new MockResponse('[{"state":"open"},{"state":"closed"}]'),
         ];
 
         yield 'good json; good json: state open' => [
-            new MockResponse('{"subscribers_count":1,"stargazers_count":2,"forks_count":3}'),
+            new MockResponse('{"full_name":"symfony/symfony","subscribers_count":1,"stargazers_count":2,"forks_count":3}'),
             new MockResponse('[{"state":"open"}]'),
         ];
 
         yield 'good json; good json: state closed' => [
-            new MockResponse('{"subscribers_count":3,"stargazers_count":2,"forks_count":1}'),
+            new MockResponse('{"full_name":"symfony/symfony","subscribers_count":3,"stargazers_count":2,"forks_count":1}'),
             new MockResponse('[{"state":"closed"}]'),
         ];
     }
@@ -94,16 +96,24 @@ class RepoDataProviderTest extends TestCase
         ];
 
         yield 'missing key in pulls' => [
-            new MockResponse('{"subscribers_count":1,"stargazers_count":2,"forks_count":3}'),
+            new MockResponse('{"full_name":"symfony/symfony","subscribers_count":1,"stargazers_count":2,"forks_count":3}'),
             new MockResponse('[{}]'),
             \InvalidArgumentException::class,
         ];
 
         yield 'good json; bad json: state other' => [
-            new MockResponse('{"subscribers_count":3,"stargazers_count":2,"forks_count":1}'),
+            new MockResponse('{"full_name":"symfony/symfony","subscribers_count":3,"stargazers_count":2,"forks_count":1}'),
             new MockResponse('[{"state":"other"}]'),
             \InvalidArgumentException::class,
         ];
+
+
+        yield 'bad json: wrong name; good json' => [
+            new MockResponse('{"full_name":"laravel/laravel","subscribers_count":0,"stargazers_count":0,"forks_count":0}'),
+            new MockResponse('[{"state":"open"},{"state":"closed"}]'),
+            \InvalidArgumentException::class,
+        ];
+
     }
 
     public function testGetDataWrongOwnerException(): void

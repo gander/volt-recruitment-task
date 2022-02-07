@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Data;
 
@@ -10,14 +10,16 @@ class RepoData
     protected int $forks;
     protected int $pullsOpen;
     protected int $pullsClosed;
+    protected string $fullName;
 
-    public function __construct(int $watchers, int $stars, int $forks, int $pullsOpen, int $pullsClosed)
+    public function __construct(string $fullName, int $watchers, int $stars, int $forks, int $pullsOpen, int $pullsClosed)
     {
         $this->watchers = $watchers;
         $this->stars = $stars;
         $this->forks = $forks;
         $this->pullsOpen = $pullsOpen;
         $this->pullsClosed = $pullsClosed;
+        $this->fullName = $fullName;
     }
 
     public function getWatchersCount(): int
@@ -43,5 +45,10 @@ class RepoData
     public function getPullsClosedCount(): int
     {
         return $this->pullsClosed;
+    }
+
+    public function getFullName(): string
+    {
+        return $this->fullName;
     }
 }
