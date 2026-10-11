@@ -1,0 +1,32 @@
+name: Smoke
+
+# Builds the Docker stack and exercises the README flow. Slow and the code
+# rarely changes, so it runs monthly and on demand instead of on every pull request.
+on:
+  schedule:
+    - cron: "0 6 1 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: docker compose up --build -d --wait
+      # The valid comparison calls GitHub anonymously (shared rate limit, flaky); it is covered by the functional test.
+      - name: README flow
+        run: |
+          test "$(curl --retry 30 --retry-all-errors --retry-delay 2 -s -o /dev/null -w '%{http_code}' 'http://localhost:8000/api?repo1=bad&repo2=laravel/laravel')" = 400
+      - name: Framework lint
+        run: |
+          docker compose exec -T app php bin/console lint:container
+          docker compose exec -T app php bin/console lint:yaml config --parse-tags
+      - if: failure()
+        run: docker compose logs
+      - if: always()
+        run: docker compose down -v
