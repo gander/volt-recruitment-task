@@ -26,8 +26,6 @@ jobs:
           tools: composer:v2
       - run: composer validate --strict --no-check-publish
       - run: composer audit --locked --no-dev --abandoned=report
-      - run: composer audit --locked
-        continue-on-error: true
       - run: docker compose config -q
 
   quality:
@@ -47,15 +45,10 @@ jobs:
 
   tests:
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         php: ['8.4']
-        experimental: [false]
-        include:
-          - php: '8.5'
-            experimental: true
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -68,22 +61,6 @@ jobs:
         with:
           composer-options: --no-scripts
       - run: composer test
-
-  outdated:
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
-        with:
-          php-version: '8.4'
-          tools: composer:v2
-      - uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
-        with:
-          composer-options: --no-scripts
-      - run: vendor/bin/swiss-knife breakpoint
 
   workflows:
     runs-on: ubuntu-latest
