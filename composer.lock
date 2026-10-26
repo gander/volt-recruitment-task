@@ -2831,16 +2831,16 @@
     "packages-dev": [
         {
             "name": "composer/semver",
-            "version": "3.5.1",
+            "version": "3.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993"
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/528948210cc46f967a4b98e83b19e76f2b504993",
-                "reference": "528948210cc46f967a4b98e83b19e76f2b504993",
+                "url": "https://api.github.com/repos/composer/semver/zipball/9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
+                "reference": "9dfce66f1e97360ea5e6d3e38ab14277e4cc591e",
                 "shasum": ""
             },
             "require": {
@@ -2892,7 +2892,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.5.1"
+                "source": "https://github.com/composer/semver/tree/3.5.2"
             },
             "funding": [
                 {
@@ -2904,7 +2904,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-05T13:12:12+00:00"
+            "time": "2026-10-22T15:37:26+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -2998,16 +2998,16 @@
         },
         {
             "name": "entropy/entropy",
-            "version": "0.4.31",
+            "version": "0.4.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/entropy.git",
-                "reference": "e31f93b8e987982e8d579c7c7f0cfa8aa7ae7e18"
+                "reference": "ed23f8ef37a4a800804a1d1095ad4c35532053e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/e31f93b8e987982e8d579c7c7f0cfa8aa7ae7e18",
-                "reference": "e31f93b8e987982e8d579c7c7f0cfa8aa7ae7e18",
+                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/ed23f8ef37a4a800804a1d1095ad4c35532053e4",
+                "reference": "ed23f8ef37a4a800804a1d1095ad4c35532053e4",
                 "shasum": ""
             },
             "require": {
@@ -3043,9 +3043,9 @@
             "description": "Entropy framework",
             "support": {
                 "issues": "https://github.com/TomasVotruba/entropy/issues",
-                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.31"
+                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.35"
             },
-            "time": "2026-10-13T12:04:57+00:00"
+            "time": "2026-10-23T13:34:34+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3284,11 +3284,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.3.1",
+            "version": "2.3.2",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/6155239b488e95d26d1ebd95c6b4bb294d7f09db",
-                "reference": "6155239b488e95d26d1ebd95c6b4bb294d7f09db",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/18bc23a0682f08591529377d271b5c4dfe9ed1dd",
+                "reference": "18bc23a0682f08591529377d271b5c4dfe9ed1dd",
                 "shasum": ""
             },
             "require": {
@@ -3344,7 +3344,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-10-08T21:09:11+00:00"
+            "time": "2026-10-24T11:36:00+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -4491,28 +4491,28 @@
         },
         {
             "name": "sebastian/git-state",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/git-state.git",
-                "reference": "792a952e0eba55b6960a48aeceb9f371aad1f76b"
+                "reference": "31a565f463686f0eefa85f899549256bf5805985"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/git-state/zipball/792a952e0eba55b6960a48aeceb9f371aad1f76b",
-                "reference": "792a952e0eba55b6960a48aeceb9f371aad1f76b",
+                "url": "https://api.github.com/repos/sebastianbergmann/git-state/zipball/31a565f463686f0eefa85f899549256bf5805985",
+                "reference": "31a565f463686f0eefa85f899549256bf5805985",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^13.0"
+                "phpunit/phpunit": "^13.4.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.0-dev"
+                    "dev-main": "1.1-dev"
                 }
             },
             "autoload": {
@@ -4536,7 +4536,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/git-state/issues",
                 "security": "https://github.com/sebastianbergmann/git-state/security/policy",
-                "source": "https://github.com/sebastianbergmann/git-state/tree/1.0.0"
+                "source": "https://github.com/sebastianbergmann/git-state/tree/1.1.0"
             },
             "funding": [
                 {
@@ -4556,7 +4556,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-03-21T12:54:28+00:00"
+            "time": "2026-10-21T05:59:52+00:00"
         },
         {
             "name": "sebastian/global-state",
@@ -5411,16 +5411,16 @@
         },
         {
             "name": "symplify/easy-coding-standard",
-            "version": "13.3.8",
+            "version": "13.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ecsphp/ecs.git",
-                "reference": "0564c0b9b807f1740bf0f2cc965ab51551f4dc3b"
+                "reference": "c4c68c81775e8227dd01c064776edd46975d9d86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ecsphp/ecs/zipball/0564c0b9b807f1740bf0f2cc965ab51551f4dc3b",
-                "reference": "0564c0b9b807f1740bf0f2cc965ab51551f4dc3b",
+                "url": "https://api.github.com/repos/ecsphp/ecs/zipball/c4c68c81775e8227dd01c064776edd46975d9d86",
+                "reference": "c4c68c81775e8227dd01c064776edd46975d9d86",
                 "shasum": ""
             },
             "require": {
@@ -5453,9 +5453,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ecsphp/ecs/issues",
-                "source": "https://github.com/ecsphp/ecs/tree/13.3.8"
+                "source": "https://github.com/ecsphp/ecs/tree/13.3.9"
             },
-            "time": "2026-10-20T21:02:34+00:00"
+            "time": "2026-10-23T12:59:45+00:00"
         },
         {
             "name": "theseer/tokenizer",
